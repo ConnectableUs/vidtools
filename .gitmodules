@@ -1,0 +1,3 @@
+[submodule "HandBrake"]
+	path = HandBrake
+	url = git@github.com:yarko/HandBrake.git

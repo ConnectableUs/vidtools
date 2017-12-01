@@ -1,0 +1,8 @@
+apt-installed:
+handbrake/xenial 0.10.2+ds1-2build1 amd64
+handbrake-cli/xenial,now 1.0.4-zhb-1ppa1~xenial1 amd64 [installed]
+handbrake-gtk/xenial 1.0.4-zhb-1ppa1~xenial1 amd64
+
+github-built:
+HandBrake 20171128162442-c34d437-master  (currently tagged as PP-build)
+
