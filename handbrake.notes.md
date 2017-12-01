@@ -1,5 +1,13 @@
 # handbrake
 
+It turns out that the "libav aac" audio encoder is the problem.
+A solution is to use a non-open-source aac encoder, the fdk-aac.
+This should build functional handbrake instances:
+
+    `./configure --launch-jobs=4 --enable-fdk-aac --launch`
+
+I leave the rest, below, for completeness.
+
 - for Ubuntu, handbrake `0.10.2+` sort of worked;
 - apt uninstalled the GUI version, and updated to a (broken) version
   of `HandBrakeCLI` 1.04;
@@ -12,6 +20,12 @@
 - finally cloned repo for handbrake: [https://github.com/HandBrake/HandBrake]
   - to build, see hints at: [https://www.packtpub.com/books/content/compiling-and-running-handbrake-ubuntu]
   - some notes:
+    - I went around a long way, but suggest you just follow these:
+      https://handbrake.fr/docs/en/latest/developer/install-dependencies-ubuntu.html
+    - for linux build, include `--enable-fdk-aac` in your ./configure, e.g.:
+      `./configure --launch-jobs=4 --enable-fdk-aac --launch`
+
+  - historical (unecessarily long) process notes:
     - installed:
       - `sudo apt install yasm`
       - `sudo apt install intltool`
@@ -30,3 +44,4 @@
       - [https://handbrake.fr/docs/en/latest/developer/build-linux.html]
 
     - did just copy / paste the ubuntu dependency lines; only the gui lines installed anything;
+
