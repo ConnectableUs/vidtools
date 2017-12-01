@@ -9,8 +9,8 @@
 CVT=HandBrakeCLI
 # everything needed is now in the config json:
 OPTS="--preset-import-file hb-audio-fix.json"
-FROM_D=Raw_Video
-TO_D=MP4_convert
+FROM_D=original_videos
+TO_D=mp4_converted
 
 
 for from in $FROM_D/*.webm; do
