@@ -8,10 +8,10 @@
 
 CVT=HandBrakeCLI
 # everything needed is now in the config json:
-OPTS="--preset-import-file hb-audio-fix.json"
+# hb-audio-match based on -Z Normal and manually matching audio bitrate of sources
+OPTS="--preset-import-file hb-audio-match.json"
 FROM_D=original_videos
 TO_D=mp4_converted
-
 
 for from in $FROM_D/*.webm; do
     to=$(basename ${from%.*}).m4v
