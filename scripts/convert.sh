@@ -15,7 +15,7 @@ TO_D=mp4_converted
 
 for from in $FROM_D/*.webm; do
     to=$(basename ${from%.*}).m4v
-    echo $CVT $OPTS -i "$from" -o "$TO_D/$to"
-    $CVT $OPTS -i "$from" -o "$TO_D/$to" 2> convert.log
+    echo $CVT $OPTS -i "$from" -o "$TO_D/$to": | tee convert.log
+    $CVT $OPTS -i "$from" -o "$TO_D/$to" 2>> convert.log
 done
 
