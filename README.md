@@ -17,4 +17,4 @@ Building w/ an alternative (better) encoder solves the problem (see handbrake.no
 
 ## flowblade installed on Ubuntu
 
-See the [flowblade.notes.md]() document.
+See the [flowblade.notes.md](flowblade.notes.md) document.
