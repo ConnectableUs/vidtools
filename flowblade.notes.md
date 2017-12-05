@@ -1,6 +1,6 @@
-# Installing flowblade
+# Installing flowblade on Ubuntu
 
-Flowblade gets a lot of
+**Flowblade** gets a lot of
 [good press](https://opensource.com/life/16/9/10-reasons-flowblade-linux-video-editor),
 and is laregely / only a python solution, albeit using python-2.
 
@@ -14,14 +14,14 @@ Here's some fundamental notes:
 - basic [installation instructions](https://github.com/jliljebl/flowblade/blob/master/flowblade-trunk/docs/INSTALLING.md)
 - additional steps:
   - edit the startup script, so that it uses the Ubuntu installed python-2.7:
-  ```
-  # set top line to #!/usr/bin/python2
-  $ sudo vi $(which flowblade)
-  ```
+      ```
+      # set top line to #!/usr/bin/python2
+      $ sudo vi $(which flowblade)
+      ```
   - upon running, install any missing python dependencies (I needed to install `mumpy`):
       ```
       $ /usr/bin/python2 -m pip install -U numpy
       ```
 
-That seems to make for a functioning *flowblade* - not sure what type of project to create, yet (reading docs).
+That seems to make for a functioning **flowblade** - not sure what type of project to create, yet (reading docs).
 

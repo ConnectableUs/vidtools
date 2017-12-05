@@ -15,3 +15,6 @@ Building w/ an alternative (better) encoder solves the problem (see handbrake.no
   - current working settings in `hb-audio-fix.json`;
   - discussion about hanging issue: [handbrake forum topic](https://forum.handbrake.fr/viewtopic.php?f=13&t=37151&p=175283#p175283)
 
+## flowblade installed on Ubuntu
+
+See the [flowblade.notes.md]() document.
