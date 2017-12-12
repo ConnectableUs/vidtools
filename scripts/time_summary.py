@@ -42,13 +42,9 @@ for line in sys.stdin:
     # extract the "HH:MM:SS.ss" info (kill the trailing comma)
     time_str = line.split()[2][:-1]
     # now split the "HH:MM:SS.ss" string
-    vid_time = time_str.split(':')
-    secs = vid_time[-1].split('.')
-    # replace the "S.s" element with "[S, decaS]"
-    del vid_time[-1]
-    vid_time.extend(secs)
+    #  want to split the fractional second too, so
+    vid_time = time_str.replace('.',':').split(':')
     vid_times.append([int(i) for i in vid_time])
-
 
 # at this point, we have: HH, MM, SS, decaS in str format
 # Now sum the columns, and do the overflow:
