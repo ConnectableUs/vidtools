@@ -15,32 +15,44 @@ The line format from video_durations.sh (uses ffmpeg) is currently this:
 
     Rec11-13-2017_10-02-38.mp4  Duration: 00:31:12.96, start: 0.104000, bitrate: 83 kb/s
 
+Any lines ending in punctuation are ignored.
 Assumes python3.5 minimum;  If you're not using it, you get what you deserve...
 '''
 import sys
+import string
 
-#with open('durations.mp4_converted.txt', 'r') as f:
+if sys.version_info.major < 3 \
+   or (sys.version_info.minor < 5 and sys.version_info.major == 3):
+    print(__doc__)
+    sys.exit(1)
+
+# with open('durations.mp4_converted.txt', 'r') as f:
 #    data = f.readlines()
-## rather run this in a pipeline:
-data = sys.stdin.readlines()
+# rather run this in a pipeline:
 
-# strip newlines
-data = [ i[:-1] for i in data ]
-# extract the HH:MM:SS.ss  info
-length_str = [ v.split()[2][:-1] for v in data ]
+# ignore any leading header lines:
+#  ffmpeg Durations output lines end in "kb/s",
+#  so lets quash any lines ending in non alpha:
+#   (considered: doing instead for lines starting w/ "#")
+vid_times = []
+for line in sys.stdin:
+    # ignore header lines (lines ending in newline)
+    if line[-2] in string.punctuation:
+        continue
+    # extract the "HH:MM:SS.ss" info (kill the trailing comma)
+    time_str = line.split()[2][:-1]
+    # now split the "HH:MM:SS.ss" string
+    vid_time = time_str.split(':')
+    secs = vid_time[-1].split('.')
+    # replace the "S.s" element with "[S, decaS]"
+    del vid_time[-1]
+    vid_time.extend(secs)
+    vid_times.append([int(i) for i in vid_time])
 
-# convert to summable integer fields: (HH, MM, SS, MS)
-# - first step gets to HH, MM, SS.ss:
-vid_length = [ v.split(':') for v in length_str ]
-vid_time = [ i[:-1] for i in vid_length ]
-
-for i in range(len(vid_time)):
-    # split the seconds into seconds and fractional seconds
-    vid_time[i].extend(vid_length[i][-1].split('.'))
 
 # at this point, we have: HH, MM, SS, decaS in str format
 # Now sum the columns, and do the overflow:
-sum_times = [ sum([int(i[j]) for i in vid_time]) for j in range(len(vid_time[0])) ]
+sum_times = [ sum([time[i] for time in vid_times]) for i in range(len(vid_times[0])) ]
 
 # sum_times has simple summed: [H, M, S, dS]
 # simplify by carrying up:
@@ -53,5 +65,5 @@ for i, v in enumerate(sum_times):
     sum_times[i] = newv
 sum_times.reverse()  # ready to display result in H:M:S:dS order
 
-print(f"Total video length: {sum_times[0]}h {sum_times[1]}m {sum_times[2]}.{sum_times[3]}s")
-
+print(f"Total video length: "
+      f" {sum_times[0]}h {sum_times[1]}m {sum_times[2]}.{sum_times[3]}s")
